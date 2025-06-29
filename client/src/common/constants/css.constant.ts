@@ -1,0 +1,4 @@
+const SPACE_IN_PX = 12;
+const BORDER_RADIUS = 6;
+
+export { BORDER_RADIUS, SPACE_IN_PX };
