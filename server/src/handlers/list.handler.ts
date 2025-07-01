@@ -20,7 +20,7 @@ class ListHandler extends SocketHandler {
     const reorderedLists = this.reorderService.reorder(
       allLists,
       sourceIndex,
-      destinationIndex
+      destinationIndex,
     );
     this.db.setData(reorderedLists);
     this.updateLists();
