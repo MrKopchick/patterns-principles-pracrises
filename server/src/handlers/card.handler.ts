@@ -15,7 +15,7 @@ class CardHandler extends SocketHandler {
     const allLists = this.db.getData();
 
     const updatedLists = allLists.map((list) =>
-      list.id === listId ? list.setCards(list.cards.concat(newCard)) : list
+      list.id === listId ? list.setCards(list.cards.concat(newCard)) : list,
     );
 
     this.db.setData(updatedLists);
