@@ -8,6 +8,7 @@ class CardHandler extends SocketHandler {
   public handleConnection(socket: Socket): void {
     socket.on(CardEvent.CREATE, this.createCard.bind(this));
     socket.on(CardEvent.REORDER, this.reorderCards.bind(this));
+    socket.on(CardEvent.DUPLICATE, this.duplicateCard.bind(this));
   }
 
   public createCard(listId: string, cardName: string): void {
@@ -42,6 +43,39 @@ class CardHandler extends SocketHandler {
       destinationListId,
     });
     this.db.setData(reordered);
+    this.updateLists();
+  }
+
+  // PATTERN:Prototype
+  private duplicateCard({
+    listId,
+    cardIndex,
+  }: {
+    listId: string;
+    cardIndex: number;
+  }): void {
+    const allLists = this.db.getData();
+
+    const updatedLists = allLists.map((list) => {
+      if (list.id === listId) {
+        const originalCard = list.cards[cardIndex];
+        if (!originalCard) return list;
+
+        const duplicatedCard = originalCard.clone();
+
+        const newCards = [
+          ...list.cards.slice(0, cardIndex + 1),
+          duplicatedCard,
+          ...list.cards.slice(cardIndex + 1),
+        ];
+
+        return list.setCards(newCards);
+      }
+
+      return list;
+    });
+
+    this.db.setData(updatedLists);
     this.updateLists();
   }
 }
