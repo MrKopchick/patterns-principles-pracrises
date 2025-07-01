@@ -1,10 +1,7 @@
-import type {
-  DraggableProvided,
-  DraggableStateSnapshot,
-} from '@hello-pangea/dnd';
 import { Draggable } from '@hello-pangea/dnd';
+import { useContext } from 'react';
 
-import { type Card } from '../../common/types/types';
+import { Card } from '../../common/types/types';
 import { CardsList } from '../card-list/card-list';
 import { DeleteButton } from '../primitives/delete-button';
 import { Splitter } from '../primitives/styled/splitter';
@@ -12,6 +9,7 @@ import { Title } from '../primitives/title';
 import { Footer } from './components/footer';
 import { Container } from './styled/container';
 import { Header } from './styled/header';
+import { SocketContext } from '../../context/socket';
 
 type Props = {
   listId: string;
@@ -21,32 +19,39 @@ type Props = {
 };
 
 export const Column = ({ listId, listName, cards, index }: Props) => {
+  const socket = useContext(SocketContext);
+
+  const handleDeleteList = () => {
+    socket.emit('list:delete', listId);
+  };
+
+  const handleRenameList = (newName: string) => {
+    socket.emit('list:rename', { listId, newName });
+  };
+
   return (
     <Draggable draggableId={listId} index={index}>
-      {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
-        <Container
-          className="column-container"
-          ref={provided.innerRef}
-          {...provided.draggableProps}
-        >
+      {(provided, snapshot) => (
+        <Container ref={provided.innerRef} {...provided.draggableProps}>
           <Header
-            className="column-header"
-            isDragging={snapshot.isDragging}
             {...provided.dragHandleProps}
+            isDragging={snapshot.isDragging}
           >
             <Title
               aria-label={listName}
               title={listName}
-              onChange={() => {}}
+              onChange={handleRenameList}
               fontSize="large"
               width={200}
               isBold
             />
             <Splitter />
-            <DeleteButton color="#FFF0" onClick={() => {}} />
+            <DeleteButton onClick={handleDeleteList} />
           </Header>
           <CardsList listId={listId} listType="CARD" cards={cards} />
-          <Footer onCreateCard={() => {}} />
+          <Footer
+            onCreateCard={(name) => socket.emit('card:create', listId, name)}
+          />
         </Container>
       )}
     </Draggable>
