@@ -1,6 +1,9 @@
 import styled from '@emotion/styled';
 
-import { BORDER_RADIUS, SPACE_IN_PX } from '../../../common/constants/constants';
+import {
+  BORDER_RADIUS,
+  SPACE_IN_PX,
+} from '../../../common/constants/constants';
 
 type Props = {
   isDragging: boolean;
