@@ -21,6 +21,9 @@ class CardHandler extends SocketHandler {
 
     this.db.setData(updatedLists);
     this.updateLists();
+
+    // PATTERN:Observer
+    this.logger.log("info", `Created card '${cardName}' in list ${listId}`);
   }
 
   private reorderCards({
@@ -44,6 +47,11 @@ class CardHandler extends SocketHandler {
     });
     this.db.setData(reordered);
     this.updateLists();
+
+    this.logger.log(
+      "info",
+      `Reordered card with ${sourceIndex} index from list '${sourceListId}' to '${destinationListId}' with ${destinationIndex} index`,
+    );
   }
 
   // PATTERN:Prototype
@@ -68,6 +76,11 @@ class CardHandler extends SocketHandler {
           duplicatedCard,
           ...list.cards.slice(cardIndex + 1),
         ];
+
+        this.logger.log(
+          "info",
+          `Duplicated card '${originalCard.name}' in list '${listId}'`,
+        );
 
         return list.setCards(newCards);
       }
