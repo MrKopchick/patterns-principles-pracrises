@@ -14,7 +14,7 @@ class List {
     this.id = randomUUID();
   }
 
-  setCards(cards: Card[]) {
+  setCards(cards: Card[]): this {
     this.cards = cards;
 
     return this;
