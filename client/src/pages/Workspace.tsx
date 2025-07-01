@@ -82,7 +82,7 @@ export const Workspace = () => {
                 />
               ))}
               {provided.placeholder}
-              <ColumnCreator onCreateList={() => {}} />
+              <ColumnCreator />
             </Container>
           )}
         </Droppable>
