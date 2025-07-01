@@ -1,7 +1,8 @@
+import { ReorderServiceContract } from "./reorder-service.contract";
 import { Card } from "../data/models/card";
 import { List } from "../data/models/list";
 
-class ReorderService {
+class ReorderService implements ReorderServiceContract {
   public reorder<T>(items: T[], startIndex: number, endIndex: number): T[] {
     const element = items[startIndex];
     const listWithRemoved = this.remove(items, startIndex);
