@@ -1,5 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { useComponentVisible } from '../../hooks/useComponentVisible';
 import { BasicText } from './styled/basic-text';
 import { TextContainer } from './styled/text-container';
@@ -19,7 +18,19 @@ export const Text = ({ onChange, text }: Props) => {
 
   const onEdit = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
-    onChange(e.target.value);
+  };
+
+  const handleBlur = () => {
+    onChange(value);
+    setIsComponentVisible(false);
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      onChange(value);
+      setIsComponentVisible(false);
+    }
   };
 
   return (
@@ -29,8 +40,9 @@ export const Text = ({ onChange, text }: Props) => {
           className="text-input"
           value={value}
           onChange={onEdit}
-          onBlur={() => setIsComponentVisible(false)}
-          autoFocus={isComponentVisible}
+          onBlur={handleBlur}
+          onKeyDown={handleKeyDown}
+          autoFocus
         />
       ) : (
         <BasicText
