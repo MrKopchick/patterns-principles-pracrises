@@ -1,10 +1,9 @@
-import type { DroppableProvided } from "@hello-pangea/dnd";
-import { Droppable } from "@hello-pangea/dnd";
-
-import { type Card } from "../../common/types/types";
-import { List } from "./components/list";
-import { ListWrapper } from "./styled/list-wrapper";
-import { ScrollContainer } from "./styled/scroll-container";
+import { Droppable } from '@hello-pangea/dnd';
+import { DroppableProvided } from '@hello-pangea/dnd';
+import { Card } from '../../common/types/types';
+import { List } from './components/list';
+import { ListWrapper } from './styled/list-wrapper';
+import { ScrollContainer } from './styled/scroll-container';
 
 type Props = {
   listId: string;
@@ -18,7 +17,7 @@ const CardsList = ({ listId, listType, cards }: Props) => {
       {(dropProvided: DroppableProvided) => (
         <ListWrapper {...dropProvided.droppableProps}>
           <ScrollContainer>
-            <List cards={cards} dropProvided={dropProvided} />
+            <List cards={cards} listId={listId} dropProvided={dropProvided} />
           </ScrollContainer>
         </ListWrapper>
       )}
