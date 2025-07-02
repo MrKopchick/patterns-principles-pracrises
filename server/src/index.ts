@@ -1,7 +1,7 @@
 import { createServer } from "http";
 import { Server, Socket } from "socket.io";
 
-import { lists } from "./data/database";
+import { lists } from "./assets/mock-data";
 import { Database } from "./data/database";
 import { CardHandler, ListHandler } from "./handlers/handlers";
 import { ReorderService } from "./services/reorder.service";
