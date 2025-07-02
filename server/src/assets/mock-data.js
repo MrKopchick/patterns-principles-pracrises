@@ -1,5 +1,5 @@
-import { Card } from "../data/models/card";
-import { List } from "../data/models/list";
+import { Card } from "../data/models/card.js";
+import { List } from "../data/models/list.js";
 
 const toDo = new List("Backlog");
 toDo.cards = [
