@@ -1,9 +1,6 @@
 import { Card } from "./models/card";
 import { List } from "./models/list";
 
-import { Card } from "./models/card";
-import { List } from "./models/list";
-
 export const lists: List[] = (() => {
   const toDo = new List("Backlog");
   toDo.cards = [
