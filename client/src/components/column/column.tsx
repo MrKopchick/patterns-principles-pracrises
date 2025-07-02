@@ -46,7 +46,7 @@ export const Column = ({ listId, listName, cards, index }: Props) => {
               isBold
             />
             <Splitter />
-            <DeleteButton onClick={handleDeleteList} />
+            <DeleteButton color="#FFF0" onClick={handleDeleteList} />
           </Header>
           <CardsList listId={listId} listType="CARD" cards={cards} />
           <Footer
