@@ -1,19 +1,4 @@
-import { Card } from "./models/card";
 import { List } from "./models/list";
-
-export const lists: List[] = (() => {
-  const toDo = new List("Backlog");
-  toDo.cards = [
-    new Card("Implement list renaming functionality", "..."),
-    new Card("Implement card creation feature", "...")
-  ];
-  const inProgress = new List("Development");
-  inProgress.cards = [
-    new Card("Implement list creation functionality", "...")
-  ];
-  return [toDo, inProgress];
-})();
-
 
 class Database {
   private static instance: Database | null = null;
