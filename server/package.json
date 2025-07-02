@@ -3,6 +3,8 @@
   "version": "0.0.0",
   "description": "Starter for Patterns Practises and Principles homework. Binary Studio Academy",
   "scripts": {
+    "build": "tsc",
+    "start:prod": "node ./dist/index.js",
     "start": "nodemon ./src/index.ts",
     "eslint-check-only": "npx eslint .",
     "eslint-fix": "npx eslint . --fix",
