@@ -8,7 +8,7 @@ import { ReorderService } from "./services/reorder.service";
 import { ReorderServiceProxy } from "./services/reorder-service.proxy";
 import { ReorderServiceContract } from "./services/reorder-service.contract";
 
-const PORT = 3005;
+const PORT = process.env.PORT || 3005;
 
 const httpServer = createServer();
 const io = new Server(httpServer, {
